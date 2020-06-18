@@ -1,0 +1,99 @@
+﻿@page
+@model NetcoreRazorPageToPdf.Web.Pages.PdfModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Pdf</title>
+</head>
+<body>
+    <h2>Flexbox not supported</h2>
+    <div class="week">
+        <div class="day">day 1</div>
+        <div class="day">day 2</div>
+        <div class="day">day 3</div>
+        <div class="day">day 4</div>
+        <div class="day">day 5</div>
+        <div class="day">day 6</div>
+        <div class="day">day 7</div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <h2>No support for flexgrid in pdf generation either.</h2>
+    <p>Some sample text in flexbox</p>
+    <div id="grid">
+        <div class="head">Name</div>
+        <div class="head">Address</div>
+        <div>Richard</div>
+        <div>Gata 1</div>
+        <div>Kenny</div>
+        <div>Stien 5</div>
+        <div>Donna</div>
+        <div>365 Boulevard</div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <h2>Table is supported in Rotativa/wkhtmltopdf</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+        </tr>
+        @foreach (var (n, a) in Model.Persons)
+        {
+            <tr>
+                <td>@n</td>
+                <td>@a</td>
+            </tr>
+        }
+    </table>
+
+
+    <style>
+        /* flex-box */
+        .week {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-flex-wrap: wrap;
+        }
+
+        .day {
+            box-sizing: border-box;
+            height: 50px;
+            border: 1px solid black;
+            -webkit-box-flex: 2;
+            -webkit-flex: 2;
+            flex: 2;
+            flex-basis: 20%;
+        }
+
+        /* flex-grid */
+        #grid {
+            display: grid;
+            flex-wrap: wrap;
+            grid-template-columns: 1fr 1fr;
+            width: 200px;
+        }
+
+            #grid > div {
+                width: 100px;
+                border: 1px solid black;
+            }
+
+        div.head {
+            background-color: #888;
+        }
+    </style>
+</body>
+</html>
